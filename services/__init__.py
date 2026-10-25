@@ -1,1 +1,1 @@
-"""Application service layer."""
+"""Application business logic."""

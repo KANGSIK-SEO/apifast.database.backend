@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}로그인{% endblock %}
+{% block content %}
+  <section class="card">
+    <h1>로그인</h1>
+    <p>체험 계정: <code>alice@example.com</code> / <code>alice1234</code></p>
+    {% if error %}<p class="error" role="alert">{{ error }}</p>{% endif %}
+    <form action="/login" method="post">
+      <label for="email">이메일</label>
+      <input id="email" name="email" type="email" autocomplete="username" required>
+      <label for="password">비밀번호</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+      <p><button class="primary" type="submit">로그인</button></p>
+    </form>
+  </section>
+{% endblock %}

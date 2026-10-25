@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}프로젝트 만들기{% endblock %}
+{% block content %}
+  <section class="card">
+    <h1>프로젝트 만들기</h1>
+    <form action="/projects/" method="post">
+      <label for="name">프로젝트 이름</label>
+      <input id="name" name="name" maxlength="120" required>
+      <label for="description">설명</label>
+      <textarea id="description" name="description"></textarea>
+      <p class="actions"><a class="button" href="/projects/">취소</a><button class="primary" type="submit">만들기</button></p>
+    </form>
+  </section>
+{% endblock %}

@@ -2,3 +2,5 @@
 __pycache__/
 *.py[cod]
 memos.db
+taskboard.db
+.env

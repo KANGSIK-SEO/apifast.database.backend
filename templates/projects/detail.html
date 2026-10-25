@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.name }}{% endblock %}
+{% block content %}
+  <a href="/projects/">← 프로젝트 목록</a>
+  <section class="card">
+    <h1>{{ project.name }}</h1>
+    <p>{{ project.description or "설명이 없습니다." }}</p>
+    <p class="muted">소유자: {{ project.owner.name }}</p>
+  </section>
+  <section>
+    <h2>할 일</h2>
+    {% if project.tasks %}
+      {% for task in project.tasks | sort(attribute="id") %}
+        <article class="card row">
+          <div>
+            <strong>{{ task.title }}</strong>
+            <span class="status {{ task.status }}">{{ "완료" if task.status == "completed" else "진행 중" }}</span>
+            {% if task.description %}<p>{{ task.description }}</p>{% endif %}
+          </div>
+          <form action="/projects/{{ project.id }}/tasks/{{ task.id }}/toggle" method="post">
+            <button type="submit">{{ "다시 진행" if task.status == "completed" else "완료 처리" }}</button>
+          </form>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>등록된 할 일이 없습니다.</p>
+    {% endif %}
+  </section>
+  <section class="card">
+    <h2>할 일 추가</h2>
+    <form action="/projects/{{ project.id }}/tasks" method="post">
+      <label for="title">제목</label>
+      <input id="title" name="title" maxlength="200" required>
+      <label for="description">설명</label>
+      <textarea id="description" name="description"></textarea>
+      <p><button class="primary" type="submit">추가</button></p>
+    </form>
+  </section>
+{% endblock %}
